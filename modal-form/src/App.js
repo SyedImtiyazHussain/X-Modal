@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 export default function App() {
   const [formState, setFormState] = useState(false);
@@ -7,9 +7,17 @@ export default function App() {
   const [emailAddress, setEmailAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
+  const formRef = useRef(null);
+
 
   const formToggle = () => {
     setFormState(true);
+  };
+
+  const handleOutsideClick = (e) => {
+    if (formRef.current && !formRef.current.contains(e.target)) {
+      setFormState(false);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -34,13 +42,13 @@ export default function App() {
 
   return (
     <div className={`App ${formState ? "background" : ""}`}>
-      <div className="modal">
         <h1>User Details Modal</h1>
         <button type="submit" onClick={formToggle}>
           Open Form
         </button>
         {formState && (
-          <div className="modal-content">
+          <div className="modal" onClick={handleOutsideClick}>
+          <div className="modal-content" ref={formRef}>
             <form>
               <h2>Fill Details</h2>
               <label htmlFor="username">Username:</label>
@@ -107,9 +115,9 @@ export default function App() {
                 </button>
               </div>
             </form>
+            </div>
           </div>
         )}
       </div>
-    </div>
   );
 }
