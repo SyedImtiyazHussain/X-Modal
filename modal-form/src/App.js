@@ -24,8 +24,13 @@ export default function App() {
     // e.preventDefault();
     console.log(userName, emailAddress);
 
+    // if (!emailAddress.includes("@")) {
+    //   alert("Invalid email. Please check your email address.");
+    // }
+
     if (!emailAddress.includes("@")) {
-      alert("Invalid email. Please check your email address.");
+      alert("Invalid email");
+      return;
     }
 
     if (phoneNumber.length !== 10) {
