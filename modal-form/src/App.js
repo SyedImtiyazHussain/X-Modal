@@ -41,13 +41,13 @@ export default function App() {
   };
 
   return (
-    <div className={`App ${formState ? "background" : ""}`}>
+    <div className={`App ${formState ? "background" : ""}`} onClick={handleOutsideClick}>
         <h1>User Details Modal</h1>
         <button type="submit" onClick={formToggle}>
           Open Form
         </button>
         {formState && (
-          <div className="modal" onClick={handleOutsideClick}>
+          <div className="modal">
           <div className="modal-content" ref={formRef}>
             <form>
               <h2>Fill Details</h2>
